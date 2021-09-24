@@ -8,8 +8,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const samplesRouter = require('./samples/samples.router')
-app.use('/', samplesRouter)
+const businessesRouter = require('./businesses/businesses.router')
+app.use('/businesses', businessesRouter)
 
 
 const notFound = require("./errors/notFound");
