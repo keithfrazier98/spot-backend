@@ -6,6 +6,7 @@ const client = yelp.client(process.env.API_KEY);
 // Place holder for Yelp Fusion's API Key. Grab them
 // from https://www.yelp.com/developers/v3/manage_app
 async function read(req, res, next) {
+  console.log(process.env.API_KEY);
   let phone;
   let business;
   let location;
@@ -52,5 +53,47 @@ async function read(req, res, next) {
   }
 }
 
+async function getBusinesses(req, res, next) {
+  const location = req.query.location;
+  const latitude = req.query.latitude;
+  const longitude = req.query.longitude;
+  const open_now = req.query.open_now;
+  const price = req.query.price;
+  const sort_by = req.query.sort_by;
+  const radius = req.query.radius;
+  const term = req.query.term;
 
-module.exports = { read };
+  let searchRequest = {
+    term: term,
+    latitude: latitude,
+    longitude: longitude,
+    location: location,
+    open_now: open_now,
+    price: price,
+    sort_by: sort_by,
+    radius: radius,
+  };
+
+  for (let [term, value] of Object.entries(searchRequest)) {
+    if (!value) {
+      delete searchRequest[term];
+    }
+  }
+
+  console.log(searchRequest);
+
+  try {
+    const response = await client.search(searchRequest);
+    const body = await response.jsonBody;
+    const prettyJson = await JSON.stringify(body, null, 4);
+    console.log(body)
+    if(body.total < 1){
+      throw new Error("search criteria")
+    }
+    res.status(200).json({ data: prettyJson });
+  } catch(err) {
+    next({status:400, message: "We couldn't find any results! Try checking your search criteria."})
+  }
+}
+
+module.exports = { read, getBusinesses };
