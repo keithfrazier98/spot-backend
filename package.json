@@ -4,7 +4,7 @@
   "description": "> This is a guide for defining the steps to setting up a backend using the following packages: > > - Express.js --> >   https://expressjs.com/ > - knex.js --> >   https://knexjs.org/ > - cors --> >   https://www.npmjs.com/package/cors > - path --> >   https://www.npmjs.com/package/path --> >   https://nodejs.org/docs/latest/api/path.html > - dotenv --> >   https://www.npmjs.com/package/dotenv > - pg (postgre) --> >   https://www.npmjs.com/package/pg > - nodemon (for dev) --> >   https://www.npmjs.com/package/nodemon > > to achieve a platform for defining basic backend routes and querying data from a database, as well as defining a local server for development.",
   "main": "app.js",
   "scripts": {
-    "start": "src/server.js",
+    "start": "node src/server.js",
     "start:dev": "nodemon src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
