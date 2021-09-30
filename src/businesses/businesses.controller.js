@@ -6,7 +6,6 @@ const client = yelp.client(process.env.API_KEY);
 // Place holder for Yelp Fusion's API Key. Grab them
 // from https://www.yelp.com/developers/v3/manage_app
 async function read(req, res, next) {
-  console.log(process.env.API_KEY);
   let phone;
   let business;
   let location;
@@ -80,13 +79,10 @@ async function getBusinesses(req, res, next) {
     }
   }
 
-  console.log(searchRequest);
-
   try {
     const response = await client.search(searchRequest);
     const body = await response.jsonBody;
     const prettyJson = await JSON.stringify(body, null, 4);
-    console.log(body)
     if(body.total < 1){
       throw new Error("search criteria")
     }

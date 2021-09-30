@@ -11,7 +11,6 @@ async function autocomplete(req, res, next) {
       longitute: -117.614586
     });
     const body = await response.jsonBody.businesses;
-    console.log(body);
     res.status(200).json({ data: body });
   } catch (error) {
     next({ status: 400, message: "failed to fetch suggestions" });
