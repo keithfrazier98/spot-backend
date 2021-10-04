@@ -1,10 +1,11 @@
 # Spot-backend
 
-    This backend repository handles routes for the **SPOT** front end through making requests with the yelp-fusion npm package to the yelp API. 
+    This backend repository handles routes for the **SPOT** front end through
+    making requests with the yelp-fusion npm package to the yelp API. 
 
     Front-end Repository: https://github.com/keithfrazier98/spot
 
-    Live Website: https://spot-beta.vercel.app/
+Live Website: https://spot-beta.vercel.app/
 
 This project uses the following dependencies:
 
