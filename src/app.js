@@ -14,9 +14,6 @@ app.use('/businesses', businessesRouter)
 const categoriesRouter = require('./categories/categories.router')
 app.use('/categories', categoriesRouter)
 
-const autocompleteRouter = require('./autocomplete/autocomplete.router')
-app.use('/autocomplete', autocompleteRouter)
-
 const notFound = require("./errors/notFound");
 app.use(notFound);
 
