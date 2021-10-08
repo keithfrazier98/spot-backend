@@ -32,7 +32,13 @@ async function read(req, res, next) {
           message: "Check your phone number, it seems to be invalid!",
         });
       }
+      console.log(searchRequest, phone, "phone");
       response = await client.phoneSearch({ phone: phone });
+      if (response.businesses.length === 0) {
+        return next({
+          status: 400,
+        });
+      }
     } else {
       business = req.query.business;
       location = req.query.location;
@@ -40,6 +46,7 @@ async function read(req, res, next) {
         term: business,
         location: location,
       };
+      console.log(searchRequest, phone, "other");
       response = await client.search(searchRequest);
     }
     firstResult = await response.jsonBody.businesses[0];
@@ -83,12 +90,16 @@ async function getBusinesses(req, res, next) {
     const response = await client.search(searchRequest);
     const body = await response.jsonBody;
     const prettyJson = await JSON.stringify(body, null, 4);
-    if(body.total < 1){
-      throw new Error("search criteria")
+    if (body.total < 1) {
+      throw new Error("search criteria");
     }
     res.status(200).json({ data: prettyJson });
-  } catch(err) {
-    next({status:400, message: "We couldn't find any results! Try checking your search criteria."})
+  } catch (err) {
+    next({
+      status: 400,
+      message:
+        "We couldn't find any results! Try checking your search criteria.",
+    });
   }
 }
 
